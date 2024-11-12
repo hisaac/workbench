@@ -1,0 +1,21 @@
+---
+
+extends: default
+
+ignore:
+  - '**/.build'
+  - '**/DerivedData'
+
+rules:
+
+  # The default line-length of 80 is a bit too restrictive.
+  line-length:
+    max: 120
+
+  # GitHub's workflow schema includes a key named "on" which trips this rule.
+  # We'll disable the check for keys only, so it will still check values.
+  truthy:
+    check-keys: false
+    ignore: |
+      *
+      !.github/workflows

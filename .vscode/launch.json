@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:workbench}/src/sw_vers",
+            "name": "Debug sw_vers (src/sw_vers)",
+            "program": "${workspaceFolder:workbench}/src/sw_vers/.build/debug/sw_vers",
+            "preLaunchTask": "swift: Build Debug sw_vers (src/sw_vers)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:workbench}/src/sw_vers",
+            "name": "Release sw_vers (src/sw_vers)",
+            "program": "${workspaceFolder:workbench}/src/sw_vers/.build/release/sw_vers",
+            "preLaunchTask": "swift: Build Release sw_vers (src/sw_vers)"
+        }
+    ]
+}
