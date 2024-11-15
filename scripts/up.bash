@@ -23,6 +23,7 @@ function install_mise() {
 	info "Installing mise"
 	curl https://mise.run | sh
 	eval "$("${MISE_BIN}" activate -C "$PROJECT_ROOT" bash --shims)"
+	update_env_file_timestamp
 }
 
 function maybe_update_mise() {
@@ -43,7 +44,10 @@ function maybe_update_mise() {
 function update_mise() {
 	info "Updating mise"
 	"${MISE_BIN}" self-update --yes || true # Ignore errors if mise is already up-to-date
+	update_env_file_timestamp
+}
 
+function update_env_file_timestamp() {
 	# Update the timestamp in the .env file
 	declare -ri epoch_time="$(date +%s)"
 	if grep -q "^MISE_UPDATE_CHECK=" "${ENV_FILE}"; then
