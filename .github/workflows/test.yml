@@ -1,10 +1,8 @@
 ---
 
-name: Test
+name: Run Tests
 
-on:
-  pull_request:
-    branches: main
+on: pull_request
 
 jobs:
   test:
@@ -14,7 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Bootstrap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "SHELL: ${SHELL}"
+          make up
+
       - name: Test
         run: |
-          sudo xcode-select --switch "/Applications/Xcode_16_beta_6.app"
-          make ci
+          "${HOME}/.local/bin/mise" exec -- just test
