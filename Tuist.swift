@@ -18,7 +18,7 @@ let config: Config = {
 	let swiftVersionFileContentsTrimmed = swiftVersionFileContents.trimmingCharacters(in: .whitespacesAndNewlines)
 	let swiftVersion = Version(stringLiteral: swiftVersionFileContentsTrimmed)
 
-	return Config(
+	let project = TuistProject.tuist(
 		compatibleXcodeVersions: .exact(xcodeVersion),
 		swiftVersion: swiftVersion,
 		generationOptions: .options(
@@ -26,4 +26,6 @@ let config: Config = {
 			staticSideEffectsWarningTargets: .all
 		)
 	)
+
+	return Config(project: project)
 }()

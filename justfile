@@ -6,10 +6,10 @@ src_dir      := project_root / "src"
 default: open
 
 open *target: up (generate target)
-	xcrun xed "{{ project_root }}/SysInfoKit.xcworkspace"
+	xcrun xed "{{ project_root }}/Workbench.xcworkspace"
 
 op *target: up (generate target)
-	"/Applications/Xcode-15.4.0.app/Contents/MacOS/Xcode" "{{ project_root }}/SysInfoKit.xcworkspace"
+	"/Applications/Xcode-15.4.0.app/Contents/MacOS/Xcode" "{{ project_root }}/Workbench.xcworkspace"
 
 generate *target: up
 	tuist install

@@ -1,4 +1,4 @@
-# workbench
+# Workbench
 
 This repository is a place for me to experiment with new tools and little projects. Consider anything here a work in progress, and if I consider it ready for use, I'll move it to a more permanent home.
 

@@ -5,11 +5,21 @@ let swiftVersionFileContents = try! String(contentsOfFile: swiftVersionFile.path
 let swiftVersionFileContentsTrimmed = swiftVersionFileContents.trimmingCharacters(in: .whitespacesAndNewlines)
 
 let project = Project(
-	name: "SysInfoKit",
+	name: "Workbench",
 	settings: .settings(
 		base: SettingsDictionary().swiftVersion(swiftVersionFileContentsTrimmed)
 	),
 	targets: [
+		.target(
+			name: "WorkbenchCLI",
+			destinations: .macOS,
+			product: .commandLineTool,
+			bundleId: "co.othr.WorkbenchCLI",
+			sources: ["src/WorkbenchCLI/Sources/**"],
+			dependencies: [
+				.target(name: "SysInfoKit"),
+			]
+		),
 		.target(
 			name: "SysInfoKit",
 			destinations: .macOS,
