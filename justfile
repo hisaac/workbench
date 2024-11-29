@@ -25,7 +25,7 @@ edit: up
 build: up
 	"{{ scripts_dir }}/build.bash"
 
-test: up
+test: up generate
 	"{{ scripts_dir }}/test.bash"
 
 format: up

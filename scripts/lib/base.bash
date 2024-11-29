@@ -38,11 +38,20 @@ function exit_handler() {
 
 function _export_vars() {
 	declare -r project_root="$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")")"
-	export PROJECT_ROOT="${project_root}"
-	export CONFIG_DIR="${project_root}/.config"
-	export SCRIPTS_DIR="${project_root}/scripts"
-	export SOURCES_DIR="${project_root}/src"
-	export TUIST_DIR="${project_root}/Tuist"
+	export PROJECT_ROOT="${PROJECT_ROOT:-$project_root}"
+
+	export ENV_FILE="${ENV_FILE:-$PROJECT_ROOT/.env}"
+	if [[ ! -f "${ENV_FILE}" ]]; then
+		touch "${ENV_FILE}"
+	fi
+
+	# shellcheck source=../.env
+	source "${ENV_FILE}"
+
+	export CONFIG_DIR="${CONFIG_DIR:-$PROJECT_ROOT/.config}"
+	export SCRIPTS_DIR="${SCRIPTS_DIR:-$PROJECT_ROOT/scripts}"
+	export SOURCES_DIR="${SOURCES_DIR:-$PROJECT_ROOT/src}"
+	export TUIST_DIR="${TUIST_DIR:-$PROJECT_ROOT/Tuist}"
 
 	export MISE_BIN="${HOME}/.local/bin/mise"
 
