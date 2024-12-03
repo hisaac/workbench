@@ -7,7 +7,9 @@ let swiftVersionFileContentsTrimmed = swiftVersionFileContents.trimmingCharacter
 let project = Project(
 	name: "Workbench",
 	settings: .settings(
-		base: SettingsDictionary().swiftVersion(swiftVersionFileContentsTrimmed)
+		base: SettingsDictionary()
+				.swiftVersion(swiftVersionFileContentsTrimmed)
+				.otherSwiftFlags(["-warn-concurrency"])
 	),
 	targets: [
 		.target(
@@ -20,6 +22,32 @@ let project = Project(
 				.target(name: "SysInfoKit"),
 			]
 		),
+
+		.target(
+			name: "SystemDefaults",
+			destinations: .macOS,
+			product: .framework,
+			bundleId: "co.othr.SystemDefaults",
+			sources: ["src/SystemDefaults/Sources/**"],
+			dependencies: [
+				.external(name: "MetaCodable"),
+			]
+		),
+		.target(
+			name: "SystemDefaultsTests",
+			destinations: .macOS,
+			product: .unitTests,
+			bundleId: "co.othr.SystemDefaultsTests",
+			sources: ["src/SystemDefaults/Tests/**"],
+			resources: [
+				"src/SystemDefaults/Tests/Resources/**",
+				// .folderReference(path: "src/SystemDefaults/Tests/Resources")
+			],
+			dependencies: [
+				.target(name: "SystemDefaults"),
+			]
+		),
+
 		.target(
 			name: "SysInfoKit",
 			destinations: .macOS,
