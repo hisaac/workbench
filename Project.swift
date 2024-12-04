@@ -20,6 +20,7 @@ let project = Project(
 			sources: ["src/WorkbenchCLI/Sources/**"],
 			dependencies: [
 				.target(name: "SysInfoKit"),
+				.target(name: "SystemDefaults"),
 			]
 		),
 
@@ -31,20 +32,6 @@ let project = Project(
 			sources: ["src/SystemDefaults/Sources/**"],
 			dependencies: [
 				.external(name: "MetaCodable"),
-			]
-		),
-		.target(
-			name: "SystemDefaultsTests",
-			destinations: .macOS,
-			product: .unitTests,
-			bundleId: "co.othr.SystemDefaultsTests",
-			sources: ["src/SystemDefaults/Tests/**"],
-			resources: [
-				"src/SystemDefaults/Tests/Resources/**",
-				// .folderReference(path: "src/SystemDefaults/Tests/Resources")
-			],
-			dependencies: [
-				.target(name: "SystemDefaults"),
 			]
 		),
 
@@ -64,7 +51,7 @@ let project = Project(
 			name: "SysInfoKitTests",
 			destinations: .macOS,
 			product: .unitTests,
-			bundleId: "co.othr.SysInfoKitTests",
+			bundleId: "co.othr.SysInfoKit.Tests",
 			sources: ["src/SysInfoKit/Tests/**"],
 			resources: ["src/SysInfoKit/Tests/Resources/**"],
 			dependencies: [

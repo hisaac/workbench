@@ -12,8 +12,8 @@ public struct SystemDefaults {
 		CFPreferencesCopyValue(
 			key as CFString,
 			domain as CFString,
-			SystemDefaults.anyUser as CFString,
-			SystemDefaults.anyHost as CFString
+			SystemDefaults.currentUser as CFString,
+			SystemDefaults.currentHost as CFString
 		)
 	}
 
