@@ -27,16 +27,6 @@ function lint_swift() {
 		--configuration "${CONFIG_DIR}/swift-format.json" \
 		--recursive "${SOURCES_DIR}" \
 		--parallel
-
-	xcrun_exec swift-format lint \
-		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${TUIST_DIR}" \
-		--parallel
-
-	xcrun_exec swift-format lint \
-		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${PROJECT_ROOT}/Project.swift" \
-		--parallel
 }
 
 function lint_yaml() {

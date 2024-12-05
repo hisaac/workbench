@@ -20,18 +20,6 @@ function format_swift() {
 		--recursive "${SOURCES_DIR}" \
 		--parallel \
 		--in-place
-
-	xcrun_exec swift-format format \
-		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${TUIST_DIR}" \
-		--parallel \
-		--in-place
-
-	xcrun_exec swift-format format \
-		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${PROJECT_ROOT}/Project.swift" \
-		--parallel \
-		--in-place
 }
 
 main "$@"
