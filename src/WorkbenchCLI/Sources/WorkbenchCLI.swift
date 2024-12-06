@@ -1,20 +1,26 @@
 import Foundation
 import SystemDefaults
 
-// NSGlobalDomain and .GlobalPreferences and $HOME/Library/Preferences/.GlobalPreferences.plist are all the same thing
-// Truly global preferences are stored in /Library/Preferences/.GlobalPreferences.plist
-
 @main
 struct WorkbenchCLI {
 	static func main() {
 		let homeDir = FileManager.default.homeDirectoryForCurrentUser.path()
-		let val = CFPreferencesCopyValue(
-			"NSDocumentSaveNewDocumentsToCloud" as CFString,
+//		let val = CFPreferencesCopyValue(
+//			"" as CFString,
+//			"\(homeDir)/Library/Preferences/.GlobalPreferences.plist" as CFString,
+//			kCFPreferencesCurrentUser,
+//			kCFPreferencesCurrentHost
+//		)
+		let values = CFPreferencesCopyMultiple(
+			nil,
 			"\(homeDir)/Library/Preferences/.GlobalPreferences.plist" as CFString,
-			kCFPreferencesAnyUser,
+			kCFPreferencesCurrentUser,
 			kCFPreferencesCurrentHost
 		)
-		print(val ?? "no value")
+
+		for (key, value) in values as! [String: Any] {
+			print("\(key): \(value)")
+		}
 
 //		let kCFPreferencesGlobal = ".GlobalPreferences" as CFString
 //

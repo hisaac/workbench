@@ -53,7 +53,7 @@ function update_env_file_timestamp() {
 	if grep -q "^MISE_UPDATE_CHECK=" "${ENV_FILE}"; then
 		sed -i '' "s/^MISE_UPDATE_CHECK=.*/MISE_UPDATE_CHECK=${epoch_time}/" "${ENV_FILE}"
 	else
-		echo "MISE_UPDATE_CHECK=${epoch_time}" >> "${ENV_FILE}"
+		echo "MISE_UPDATE_CHECK=${epoch_time}" >>"${ENV_FILE}"
 	fi
 }
 

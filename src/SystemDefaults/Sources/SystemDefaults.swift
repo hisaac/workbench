@@ -7,53 +7,74 @@ public struct SystemDefaults {
 
 	public func object(
 		for key: String,
-		domain: String = SystemDefaults.globalDomain
+		domain: String,
+		user: String,
+		host: String
 	) -> PropertyListValue? {
 		CFPreferencesCopyValue(
 			key as CFString,
 			domain as CFString,
-			SystemDefaults.currentUser as CFString,
-			SystemDefaults.currentHost as CFString
+			user as CFString,
+			host as CFString
 		)
 	}
 
 	public func set(
-		_ value: PropertyListValue,
+		_ value: PropertyListValue?,
 		for key: String,
-		domain: String = SystemDefaults.globalDomain
+		domain: String,
+		user: String,
+		host: String
 	) {
 		CFPreferencesSetValue(
 			key as CFString,
 			value as PropertyListValue,
 			domain as CFString,
-			SystemDefaults.anyUser as CFString,
-			SystemDefaults.anyHost as CFString
+			user as CFString,
+			host as CFString
 		)
 		synchronize(domain: domain)
 	}
 
 	public func removeObject(
 		for key: String,
-		domain: String = SystemDefaults.globalDomain
+		domain: String,
+		user: String,
+		host: String
 	) {
 		CFPreferencesSetValue(
 			key as CFString,
 			nil,
 			domain as CFString,
-			SystemDefaults.anyUser as CFString,
-			SystemDefaults.anyHost as CFString
+			user as CFString,
+			host as CFString
 		)
 		synchronize(domain: domain)
 	}
 
 	@discardableResult
-	public func synchronize(domain: String = SystemDefaults.globalDomain) -> Bool {
+	public func synchronize(domain: String) -> Bool {
 		CFPreferencesAppSynchronize(domain as CFString)
 	}
 }
 
 extension SystemDefaults {
-	public static let globalDomain = ".GlobalPreferences"
+	private static let userHomeDirectory = FileManager.default.homeDirectoryForCurrentUser
+
+	public static let userGlobalDomain = userHomeDirectory.appending(path: "Library/Preferences/.GlobalPreferences.plist").path()
+	public static let userGlobalDomain_m = userHomeDirectory.appending(path: "Library/Preferences/.GlobalPreferences_m.plist").path()
+	public static var userGlobalDomain_ByHost: String? {
+		let byHostDirectory = userHomeDirectory.appending(path: "Library/Preferences/ByHost")
+		guard
+			let byHostContents = try? FileManager.default.contentsOfDirectory(atPath: byHostDirectory.path()),
+			let byHostFile = byHostContents.first(where: { $0.hasPrefix(".GlobalPreferences.") })
+		else {
+			return nil
+		}
+		return byHostDirectory.appending(path: byHostFile).path()
+	}
+
+	public static let systemGlobalDomain = "/Library/Preferences/.GlobalPreferences.plist"
 
 	public static let anyApplication = kCFPreferencesAnyApplication as String
 	public static let currentApplication = kCFPreferencesCurrentApplication as String

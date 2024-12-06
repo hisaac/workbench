@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "othr"
-    ]
+    ],
+    "sweetpad.build.derivedDataPath": "DerivedData",
+    "sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
+    "sweetpad.system.enableSetvbuf": true,
+    "sweetpad.tuist.autogenerate": true
 }

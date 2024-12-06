@@ -2,5 +2,6 @@
 java = "latest"
 just = "latest"
 shfmt = "latest"
+tuist = "latest"
 xcodes = "latest"
 yamllint = "latest"

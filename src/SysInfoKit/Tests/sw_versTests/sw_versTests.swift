@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import sw_vers
+@testable import SysInfoKit
 
 // swift-format-ignore: TypeNamesShouldBeCapitalized
 final class sw_versTests: XCTestCase {

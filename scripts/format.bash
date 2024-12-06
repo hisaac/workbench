@@ -14,12 +14,15 @@ function format_scripts() {
 }
 
 function format_swift() {
-	info "Formatting Swift"
+	info "Formatting Swift Files"
 	xcrun_exec swift-format format \
 		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${SOURCES_DIR}" \
-		--parallel \
-		--in-place
+		--in-place \
+		--recursive \
+		"${SOURCES_DIR}" \
+		"${TUIST_DIR}" \
+		"${PROJECT_ROOT}/Project.swift" \
+		"${PROJECT_ROOT}/Tuist.swift"
 }
 
 main "$@"

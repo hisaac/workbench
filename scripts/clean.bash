@@ -13,10 +13,13 @@ function main() {
 
 function clean() {
 	killall -q Xcode || true
+	mise_exec tuist clean --path "${PROJECT_ROOT}"
 	find "${PROJECT_ROOT}" -type d -name '.build' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name '.swiftpm' -exec rm -rf {} +
 	find "${PROJECT_ROOT}" -type d -name 'DerivedData' -exec rm -rf {} +
 	find "${PROJECT_ROOT}" -type f -name 'Package.resolved' -exec rm -rf {} +
+	find "${PROJECT_ROOT}" -type d -name '*.xcodeproj' -exec rm -rf {} +
+	find "${PROJECT_ROOT}" -type d -name '*.xcworkspace' -exec rm -rf {} +
+	rm -rf "${PROJECT_ROOT}/Derived"
 }
 
 function nuke() {

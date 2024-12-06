@@ -25,8 +25,11 @@ function lint_swift() {
 	info "Linting Swift"
 	xcrun_exec swift-format lint \
 		--configuration "${CONFIG_DIR}/swift-format.json" \
-		--recursive "${SOURCES_DIR}" \
-		--parallel
+		--recursive \
+		"${SOURCES_DIR}" \
+		"${TUIST_DIR}" \
+		"${PROJECT_ROOT}/Project.swift" \
+		"${PROJECT_ROOT}/Tuist.swift"
 }
 
 function lint_yaml() {

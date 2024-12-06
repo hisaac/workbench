@@ -5,8 +5,20 @@ src_dir      := project_root / "src"
 
 default: open
 
-open: up
-	xcrun xed "{{ project_root }}"
+open *target: up (generate target)
+	xcrun xed "{{ project_root }}/Workbench.xcworkspace"
+
+generate *target: up
+	tuist install
+	tuist generate {{ target }} --no-open --path "{{ project_root }}"
+
+cache: up
+	tuist install
+	tuist cache
+
+edit: up
+	tuist edit --permanent --only-current-directory --path "{{ project_root }}"
+	xcrun xed "{{ project_root }}/Manifests.xcworkspace"
 
 build: up
 	"{{ scripts_dir }}/build.bash"
