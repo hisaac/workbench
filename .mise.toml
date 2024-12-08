@@ -1,7 +1,9 @@
 [tools]
 java = "latest"
 just = "latest"
+python = "latest"
 shfmt = "latest"
 tuist = "latest"
+xcbeautify = "latest"
 xcodes = "latest"
 yamllint = "latest"

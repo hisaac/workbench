@@ -8,8 +8,8 @@ let project = Project(
 	name: "Workbench",
 	settings: .settings(
 		base: SettingsDictionary()
-				.swiftVersion(swiftVersionFileContentsTrimmed)
-				.otherSwiftFlags(["-warn-concurrency"])
+			.swiftVersion(swiftVersionFileContentsTrimmed)
+			.otherSwiftFlags(["-warn-concurrency"])
 	),
 	targets: [
 		.target(

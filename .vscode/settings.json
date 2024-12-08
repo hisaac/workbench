@@ -4,6 +4,7 @@
     ],
     "sweetpad.build.derivedDataPath": "DerivedData",
     "sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
-    "sweetpad.system.enableSetvbuf": true,
-    "sweetpad.tuist.autogenerate": true
+    "sweetpad.system.enableSetvbuf": false,
+    "sweetpad.tuist.autogenerate": true,
+    "sweetpad.build.allowProvisioningUpdates": false
 }

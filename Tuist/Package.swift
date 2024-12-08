@@ -1,17 +1,6 @@
 // swift-tools-version: 5.10
 
-import PackageDescription
-
-// #if TUIST
-// 	import ProjectDescription
-
-// 	let packageSettings = PackageSettings(
-// 		targetSettings: [
-// 			"PluginCore": .settings(base: SettingsDictionary().swiftVersion("5")),
-// 		]
-// 	)
-
-// #endif
+@preconcurrency import PackageDescription
 
 let package = Package(
 	name: "Workbench",
