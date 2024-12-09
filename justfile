@@ -9,19 +9,17 @@ open *target: up (generate target)
 	xcrun xed "{{ project_root }}/Workbench.xcworkspace"
 
 generate *target: up
-	tuist install
 	tuist generate {{ target }} --no-open --path "{{ project_root }}"
 
 cache: up
-	tuist install
 	tuist cache
 
 edit: up
 	tuist edit --permanent --only-current-directory --path "{{ project_root }}"
 	xcrun xed "{{ project_root }}/Manifests.xcworkspace"
 
-build: up
-	"{{ scripts_dir }}/build.bash"
+build *args: up
+	python "{{ scripts_dir }}/main.py" build {{ args }}
 
 test: up
 	"{{ scripts_dir }}/test.bash"

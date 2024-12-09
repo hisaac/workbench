@@ -12,6 +12,7 @@ function main() {
 
 	install_plugins
 	install_python_dependencies
+	install_tuist_dependencies
 
 	select_xcode_version
 }
@@ -61,6 +62,11 @@ function update_env_file_timestamp() {
 function install_plugins() {
 	info "Installing mise plugins"
 	"${MISE_BIN}" install --yes
+}
+
+function install_tuist_dependencies() {
+	info "Installing Tuist dependencies"
+	mise_exec tuist install
 }
 
 function install_python_dependencies() {
