@@ -1,10 +1,8 @@
 #!/bin/bash
 
-source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/lib/base.bash"
-trap 'exit_handler "$?" "${0##*/}"' EXIT
-
 function main() {
-	declare -r nuke="${1:-}"
+	declare -r project_root="$1"
+	declare -r nuke="${2:-}"
 	clean
 	if [[ "${nuke}" == "nuke" || "${nuke}" == "true" ]]; then
 		nuke
@@ -13,15 +11,17 @@ function main() {
 
 function clean() {
 	killall -q Xcode || true
-	mise_exec tuist clean --path "${PROJECT_ROOT}"
-	find "${PROJECT_ROOT}" -type d -name '.build' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name 'DerivedData' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type f -name 'Package.resolved' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name '*.xcodeproj' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name '*.xcworkspace' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name '.venv' -exec rm -rf {} +
-	find "${PROJECT_ROOT}" -type d -name '__pycache__' -exec rm -rf {} +
-	rm -rf "${PROJECT_ROOT}/Derived"
+
+	"${HOME}/.local/bin/mise" exec -- tuist clean --path "${project_root}"
+
+	find "${project_root}" -type d -name '.build' -exec rm -rf {} +
+	find "${project_root}" -type d -name 'DerivedData' -exec rm -rf {} +
+	find "${project_root}" -type f -name 'Package.resolved' -exec rm -rf {} +
+	find "${project_root}" -type d -name '*.xcodeproj' -exec rm -rf {} +
+	find "${project_root}" -type d -name '*.xcworkspace' -exec rm -rf {} +
+	find "${project_root}" -type d -name '.venv' -exec rm -rf {} +
+	find "${project_root}" -type d -name '__pycache__' -exec rm -rf {} +
+	rm -rf "${project_root}/Derived"
 }
 
 function nuke() {
