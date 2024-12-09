@@ -36,7 +36,7 @@ up:
 	"{{ scripts_dir }}/up.bash"
 
 clean:
-	python "{{ scripts_dir }}/main.py" clean
+	"{{ scripts_dir }}/clean.bash"
 
 nuke:
-	python "{{ scripts_dir }}/main.py" clean nuke
+	"{{ scripts_dir }}/clean.bash" nuke
