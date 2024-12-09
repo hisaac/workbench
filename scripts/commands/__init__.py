@@ -11,21 +11,21 @@ XCRUN_BIN = "/usr/bin/xcrun"
 
 
 def _get_xcode_version() -> str:
-    """Get the Xcode version from the .xcode_version file
+	"""Get the Xcode version from the .xcode_version file
 
-    Returns:
-            str: The Xcode version
+	Returns:
+	        str: The Xcode version
 
-    Raises:
-            FileNotFoundError: If the .xcode-version file is not found
-    """
+	Raises:
+	        FileNotFoundError: If the .xcode-version file is not found
+	"""
 
-    xcode_version_file = CONFIG_DIR / ".xcode-version"
+	xcode_version_file = CONFIG_DIR / ".xcode-version"
 
-    if not xcode_version_file.exists():
-        raise FileNotFoundError(f"Xcode version file not found at {xcode_version_file}")
+	if not xcode_version_file.exists():
+		raise FileNotFoundError(f"Xcode version file not found at {xcode_version_file}")
 
-    return xcode_version_file.read_text().strip()
+	return xcode_version_file.read_text().strip()
 
 
 XCODE_VERSION = _get_xcode_version()

@@ -3,9 +3,11 @@
 		"killall",
 		"othr",
 		"pycache",
+		"shellcheck",
 		"shfmt",
 		"swiftpm",
 		"venv",
+		"xcodes",
 		"yapf"
 	],
 	"sweetpad.build.derivedDataPath": "DerivedData",
