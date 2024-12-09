@@ -7,6 +7,7 @@ SOURCES_DIR = PROJECT_ROOT / "src"
 TUIST_DIR = PROJECT_ROOT / "tuist"
 
 MISE_BIN = Path.home() / ".local/bin/mise"
+XCRUN_BIN = "/usr/bin/xcrun"
 
 
 def _get_xcode_version() -> str:

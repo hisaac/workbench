@@ -25,7 +25,7 @@ test: up
 	"{{ scripts_dir }}/test.bash"
 
 format: up
-	"{{ scripts_dir }}/format.bash"
+	python "{{ scripts_dir }}/main.py" format
 
 lint: up
 	"{{ scripts_dir }}/lint.bash"

@@ -1,7 +1,10 @@
 import argparse
 import subprocess
 
-from commands import PROJECT_ROOT, MISE_BIN
+from commands import (
+    MISE_BIN,
+    PROJECT_ROOT,
+)
 
 
 def setup_parser(subparser) -> argparse.ArgumentParser:

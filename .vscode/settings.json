@@ -3,6 +3,7 @@
 		"killall",
 		"othr",
 		"pycache",
+		"shfmt",
 		"swiftpm",
 		"venv",
 		"yapf"
