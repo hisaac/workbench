@@ -22,6 +22,8 @@ function clean() {
 	find "${project_root}" -type d -name '.venv' -exec rm -rf {} +
 	find "${project_root}" -type d -name '__pycache__' -exec rm -rf {} +
 	rm -rf "${project_root}/Derived"
+
+	sed -i '' '/LAST_UPDATE_CHECK/d' "${project_root}/.env"
 }
 
 function nuke() {

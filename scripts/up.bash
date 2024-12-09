@@ -5,63 +5,67 @@ trap 'exit_handler "$?" "${0##*/}"' EXIT
 
 function main() {
 	if [[ -f "${MISE_BIN}" ]]; then
-		maybe_update_mise
+		maybe_update
 	else
 		install_mise
+		do_updates
 	fi
-
-	install_plugins
-	install_python_dependencies
-	install_tuist_dependencies
 
 	select_xcode_version
 }
 
-function select_xcode_version() {
-	mise_exec xcodes select "${XCODE_VERSION}"
+function maybe_update() {
+	if [[ -z "${LAST_UPDATE_CHECK:-}" ]]; then
+		do_updates
+		return
+	fi
+
+	declare -ri epoch_time="$(date +%s)"
+	declare -ri seconds_since_update="$((epoch_time - LAST_UPDATE_CHECK))"
+	declare -ri one_day_in_seconds=86400
+
+	if [[ "${seconds_since_update}" -gt "${one_day_in_seconds}" ]]; then
+		do_updates
+	fi
+}
+
+function do_updates() {
+	info "Running daily updates"
+	update_mise
+	install_mise_plugins
+	install_python_dependencies
+	install_tuist_dependencies
+	update_timestamp
+}
+
+function update_timestamp() {
+	declare -ri epoch_time="$(date +%s)"
+	if grep -q "^LAST_UPDATE_CHECK=" "${ENV_FILE}"; then
+		sed -i '' "s/^LAST_UPDATE_CHECK=.*/LAST_UPDATE_CHECK=${epoch_time}/" "${ENV_FILE}"
+	else
+		echo "LAST_UPDATE_CHECK=${epoch_time}" >>"${ENV_FILE}"
+	fi
 }
 
 function install_mise() {
 	info "Installing mise"
 	curl https://mise.run | sh
 	eval "$("${MISE_BIN}" activate -C "$PROJECT_ROOT" bash --shims)"
-	update_env_file_timestamp
-}
-
-function maybe_update_mise() {
-	if [[ -z "${MISE_UPDATE_CHECK:-}" ]]; then
-		update_mise
-		return
-	fi
-
-	declare -ri epoch_time="$(date +%s)"
-	declare -ri seconds_since_mise_update="$((epoch_time - MISE_UPDATE_CHECK))"
-	declare -ri one_day_in_seconds=86400
-
-	if [[ "${seconds_since_mise_update}" -gt "${one_day_in_seconds}" ]]; then
-		update_mise
-	fi
 }
 
 function update_mise() {
 	info "Updating mise"
 	"${MISE_BIN}" self-update --yes || true # Ignore errors if mise is already up-to-date
-	update_env_file_timestamp
 }
 
-function update_env_file_timestamp() {
-	# Update the timestamp in the .env file
-	declare -ri epoch_time="$(date +%s)"
-	if grep -q "^MISE_UPDATE_CHECK=" "${ENV_FILE}"; then
-		sed -i '' "s/^MISE_UPDATE_CHECK=.*/MISE_UPDATE_CHECK=${epoch_time}/" "${ENV_FILE}"
-	else
-		echo "MISE_UPDATE_CHECK=${epoch_time}" >>"${ENV_FILE}"
-	fi
-}
-
-function install_plugins() {
+function install_mise_plugins() {
 	info "Installing mise plugins"
 	"${MISE_BIN}" install --yes
+}
+
+function install_python_dependencies() {
+	info "Installing Python dependencies"
+	mise_exec pip install -e .
 }
 
 function install_tuist_dependencies() {
@@ -69,9 +73,8 @@ function install_tuist_dependencies() {
 	mise_exec tuist install
 }
 
-function install_python_dependencies() {
-	info "Installing Python dependencies"
-	mise_exec pip install -e ".[dev]"
+function select_xcode_version() {
+	mise_exec xcodes select "${XCODE_VERSION}"
 }
 
 main "$@"
