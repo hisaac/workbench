@@ -61,8 +61,12 @@ public struct SystemDefaults {
 extension SystemDefaults {
 	private static let userHomeDirectory = FileManager.default.homeDirectoryForCurrentUser
 
-	public static let userGlobalDomain = userHomeDirectory.appending(path: "Library/Preferences/.GlobalPreferences.plist").path()
-	public static let userGlobalDomain_m = userHomeDirectory.appending(path: "Library/Preferences/.GlobalPreferences_m.plist").path()
+	public static let userGlobalDomain = userHomeDirectory.appending(
+		path: "Library/Preferences/.GlobalPreferences.plist"
+	).path()
+	public static let userGlobalDomain_m = userHomeDirectory.appending(
+		path: "Library/Preferences/.GlobalPreferences_m.plist"
+	).path()
 	public static var userGlobalDomain_ByHost: String? {
 		let byHostDirectory = userHomeDirectory.appending(path: "Library/Preferences/ByHost")
 		guard

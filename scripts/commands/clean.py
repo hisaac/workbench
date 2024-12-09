@@ -4,16 +4,27 @@ import subprocess
 
 from pathlib import Path
 
-from commands import PROJECT_ROOT, MISE_BIN
+from commands import PROJECT_ROOT, MISE_BIN, SCRIPTS_DIR
 
 
 def setup_parser(subparsers) -> argparse.ArgumentParser:
     """Set up the clean subparser"""
-    return subparsers.add_parser("clean", help="Clean generated files")
+    parser = subparsers.add_parser("clean", help="Clean generated files")
+    parser.add_argument(
+        "--nuke",
+        action="store_true",
+        help="Also clean system-wide Xcode and Swift PM caches",
+    )
+    return parser
 
 
 def handle(args):
-    """Handle the clean command"""
+    clean(args)
+    if args.nuke:
+        nuke(args)
+
+
+def clean(args):
     print("Cleaning generated files...")
 
     # Kill Xcode if running
@@ -27,7 +38,6 @@ def handle(args):
     patterns = [
         "__pycache__",
         ".build",
-        ".venv/",
         "*.xcodeproj",
         "*.xcworkspace",
         "Derived",
@@ -46,6 +56,13 @@ def handle(args):
 
 
 def nuke(args):
-    shutil.rmtree(Path.home() / "Library/Developer/Xcode/DerivedData")
-    shutil.rmtree(Path.home() / "Library/Caches/org.swift.swiftpm")
-    shutil.rmtree(Path.home() / "Library/org.swift.swiftpm")
+    paths = [
+        Path.home() / "Library/Developer/Xcode/DerivedData",
+        Path.home() / "Library/Caches/org.swift.swiftpm",
+        Path.home() / "Library/org.swift.swiftpm",
+        SCRIPTS_DIR / ".venv",
+    ]
+
+    for path in paths:
+        if path.is_dir():
+            shutil.rmtree(path, ignore_errors=True)
