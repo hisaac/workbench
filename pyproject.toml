@@ -1,8 +1,13 @@
-[tool.yapf]
-based_on_style = "pep8"
+[project]
+name = "workbench"
+version = "0.1.0"
+requires-python = ">=3.8"
 
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.yapfignore]
-ignore_patterns = [
-	"**/.venv"
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0"
 ]

@@ -1,12 +1,15 @@
 {
-    "cSpell.words": [
-        "killall",
-        "othr",
-        "swiftpm"
-    ],
-    "sweetpad.build.derivedDataPath": "DerivedData",
-    "sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
-    "sweetpad.system.enableSetvbuf": false,
-    "sweetpad.tuist.autogenerate": true,
-    "sweetpad.build.allowProvisioningUpdates": false
+	"cSpell.words": [
+		"killall",
+		"othr",
+		"pycache",
+		"swiftpm",
+		"venv",
+		"yapf"
+	],
+	"sweetpad.build.derivedDataPath": "DerivedData",
+	"sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
+	"sweetpad.system.enableSetvbuf": false,
+	"sweetpad.tuist.autogenerate": true,
+	"sweetpad.build.allowProvisioningUpdates": false
 }

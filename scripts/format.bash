@@ -6,6 +6,7 @@ trap 'exit_handler "$?" "${0##*/}"' EXIT
 function main() {
 	format_scripts
 	format_swift
+	format_python
 }
 
 function format_scripts() {
@@ -23,6 +24,11 @@ function format_swift() {
 		"${TUIST_DIR}" \
 		"${PROJECT_ROOT}/Project.swift" \
 		"${PROJECT_ROOT}/Tuist.swift"
+}
+
+function format_python() {
+	info "Formatting Python Files"
+	black "${SCRIPTS_DIR}"
 }
 
 main "$@"
