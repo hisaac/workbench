@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
-        "othr"
+        "killall",
+        "othr",
+        "swiftpm"
     ],
     "sweetpad.build.derivedDataPath": "DerivedData",
     "sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",

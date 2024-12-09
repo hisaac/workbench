@@ -19,6 +19,8 @@ function clean() {
 	find "${PROJECT_ROOT}" -type f -name 'Package.resolved' -exec rm -rf {} +
 	find "${PROJECT_ROOT}" -type d -name '*.xcodeproj' -exec rm -rf {} +
 	find "${PROJECT_ROOT}" -type d -name '*.xcworkspace' -exec rm -rf {} +
+	find "${PROJECT_ROOT}" -type d -name '.venv' -exec rm -rf {} +
+	find "${PROJECT_ROOT}" -type d -name '__pycache__' -exec rm -rf {} +
 	rm -rf "${PROJECT_ROOT}/Derived"
 }
 

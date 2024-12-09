@@ -1,0 +1,8 @@
+[tool.yapf]
+based_on_style = "pep8"
+
+
+[tool.yapfignore]
+ignore_patterns = [
+	"**/.venv"
+]
