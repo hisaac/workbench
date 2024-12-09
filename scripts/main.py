@@ -1,9 +1,13 @@
 import argparse
 
 
-from commands import build
-from commands import format
-from commands import lint
+from commands import (
+	build,
+	format,
+	lint,
+	run,
+	test,
+)
 
 
 def main():
@@ -14,10 +18,18 @@ def main():
 	format.setup_parser(subparsers)
 	lint.setup_parser(subparsers)
 
+	run.setup_parser(subparsers)
+	test.setup_parser(subparsers)
+
 	args = parser.parse_args()
 
 	if args.command == "build":
 		build.handle(args)
+	elif args.command == "run":
+		run.handle(args)
+	elif args.command == "test":
+		test.handle(args)
+
 	elif args.command == "format":
 		format.handle(args)
 	elif args.command == "lint":

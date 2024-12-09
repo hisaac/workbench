@@ -8,9 +8,9 @@ from commands import (
 
 
 def setup_parser(subparser) -> argparse.ArgumentParser:
-	parser = subparser.add_parser("build", help="Build the project using Tuist")
+	parser = subparser.add_parser("run", help="Run the project using Tuist")
 	parser.add_argument(
-		"args", nargs="*", help="Additional arguments to pass to tuist build"
+		"args", nargs="*", help="Additional arguments to pass to tuist run"
 	)
 	return parser
 
@@ -22,7 +22,7 @@ def handle(args) -> None:
 			"exec",
 			"--",
 			"tuist",
-			"build",
+			"run",
 			"--path",
 			PROJECT_ROOT,
 			*args.args,

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/lib/base.bash"
+trap 'exit_handler "$?" "${0##*/}"' EXIT
+
 function main() {
 	declare -r project_root="$1"
 	declare -r nuke="${2:-}"

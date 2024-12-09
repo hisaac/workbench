@@ -5,24 +5,17 @@ src_dir      := project_root / "src"
 
 default: open
 
-open *target: up (generate target)
+open target="": (_tuist_generate target)
 	xcrun xed "{{ project_root }}/Workbench.xcworkspace"
 
-generate *target: up
-	tuist generate {{ target }} --no-open --path "{{ project_root }}"
+build target="":
+	python "{{ scripts_dir }}/main.py" build {{ target }}
 
-cache: up
-	tuist cache
+test target="":
+	python "{{ scripts_dir }}/main.py" test {{ target }}
 
-edit: up
-	tuist edit --permanent --only-current-directory --path "{{ project_root }}"
-	xcrun xed "{{ project_root }}/Manifests.xcworkspace"
-
-build *args: up
-	python "{{ scripts_dir }}/main.py" build {{ args }}
-
-test: up
-	"{{ scripts_dir }}/test.bash"
+run target="":
+	python "{{ scripts_dir }}/main.py" run {{ target }}
 
 format: up
 	python "{{ scripts_dir }}/main.py" format
@@ -32,6 +25,14 @@ lint: up
 
 up:
 	"{{ scripts_dir }}/up.bash"
+	tuist cache --path "{{ project_root }}"
+
+_tuist_generate target="":
+	tuist generate --path "{{ project_root }}" --no-open {{ target }}
+
+edit: up
+	tuist edit --permanent --only-current-directory --path "{{ project_root }}"
+	xcrun xed "{{ project_root }}/Manifests.xcworkspace"
 
 clean:
 	"{{ scripts_dir }}/clean.bash" "{{ project_root }}"

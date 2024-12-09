@@ -70,7 +70,7 @@ function install_python_dependencies() {
 
 function install_tuist_dependencies() {
 	info "Installing Tuist dependencies"
-	mise_exec tuist install
+	mise_exec tuist install --path "${PROJECT_ROOT}" --update
 }
 
 function select_xcode_version() {
