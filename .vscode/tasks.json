@@ -1,0 +1,16 @@
+{
+	"tasks": [
+		{
+			"type": "sweetpad",
+			"action": "build",
+			"problemMatcher": [
+				"$sweetpad-watch",
+				"$sweetpad-xcodebuild-default",
+				"$sweetpad-xcbeautify-errors",
+				"$sweetpad-xcbeautify-warnings"
+			],
+			"label": "sweetpad: build",
+			"detail": "Build the app"
+		}
+	]
+}

@@ -1,61 +1,57 @@
+import ArgumentParser
 import Foundation
 
-// swift-format-ignore: TypeNamesShouldBeCapitalized
-enum sw_vers {
-	static func run(
-		arguments: [String] = ProcessInfo.processInfo.arguments
-	) throws -> String {
-		let usage = "Usage: sw_vers [--help|--productName|--productVersion|--productVersionExtra|--buildVersion]"
+protocol RunnableCommand {
+	var binary: URL { get }
+	var arguments: [String] { get }
+}
 
-		let arguments = sw_versArgument.process(arguments)
+public struct sw_vers: ParsableCommand, RunnableCommand {
+	public static var configuration = CommandConfiguration(
+		commandName: "sw_vers",
+		abstract: "Print macOS system version information"
+	)
 
-		let systemVersion = try SystemVersion()
+	@Flag(help: "Print the product name")
+	public var productName: Bool = false
 
-		guard arguments.isEmpty == false else {
-			let output = """
-				ProductName:		\(systemVersion.productName)
-				ProductVersion:		\(systemVersion.productVersion)
-				BuildVersion:		\(systemVersion.productBuildVersion)
-				"""
-			return output
-		}
+	@Flag(help: "Print the product version")
+	public var productVersion: Bool = false
 
-		switch arguments {
-			case _ where arguments.contains(.productName):
-				return systemVersion.productName
-			case _ where arguments.contains(.productVersion):
-				return systemVersion.productVersion
-			case _ where arguments.contains(.productVersionExtra):
-				// TODO: Figure out how to handle `productVersionExtra`
-				return ""
-			case _ where arguments.contains(.buildVersion):
-				return systemVersion.productBuildVersion
-			default:
-				return usage
-		}
+	@Flag(help: "Print the product version extra")
+	public var productVersionExtra: Bool = false
+
+	@Flag(help: "Print the build version")
+	public var buildVersion: Bool = false
+
+	public var binary: URL = sw_vers.defaultBinary
+
+	public static let defaultBinary = URL(fileURLWithPath: "/usr/bin/sw_vers")
+
+	public var arguments: [String] {
+		var args = [String]()
+		if productName { args.append("--productName") }
+		if productVersion { args.append("--productVersion") }
+		if productVersionExtra { args.append("--productVersionExtra") }
+		if buildVersion { args.append("--buildVersion") }
+		return args
 	}
 
-	// swift-format-ignore: TypeNamesShouldBeCapitalized
-	enum sw_versArgument: String, CaseIterable {
-		case help
-		case productName
-		case productVersion
-		case productVersionExtra
-		case buildVersion
+	public init() {
+		self.init(binary: sw_vers.defaultBinary)
+	}
 
-		init?(rawValue: String) {
-			for argument in sw_versArgument.allCases {
-				let trimmedRawValue = rawValue.replacingOccurrences(of: "-", with: "")
-				if trimmedRawValue.localizedLowercase == argument.rawValue.localizedLowercase {
-					self = argument
-					return
-				}
-			}
-			return nil
-		}
-
-		static func process(_ arguments: [String]) -> [sw_versArgument] {
-			arguments.compactMap { sw_versArgument(rawValue: $0) }
-		}
+	public init(
+		binary: URL = sw_vers.defaultBinary,
+		productName: Bool = false,
+		productVersion: Bool = false,
+		productVersionExtra: Bool = false,
+		buildVersion: Bool = false
+	) {
+		self.binary = binary
+		self.productName = productName
+		self.productVersion = productVersion
+		self.productVersionExtra = productVersionExtra
+		self.buildVersion = buildVersion
 	}
 }

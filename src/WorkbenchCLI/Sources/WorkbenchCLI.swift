@@ -1,26 +1,35 @@
 import Foundation
+import SysInfoKit
 import SystemDefaults
 
 @main
 struct WorkbenchCLI {
-	static func main() {
-		let homeDir = FileManager.default.homeDirectoryForCurrentUser.path()
+	static func main() throws {
+		let swVersCommand = sw_vers(productName: true)
+
+		let process = Process()
+		process.executableURL = swVersCommand.binary
+		process.arguments = swVersCommand.arguments
+		process.waitUntilExit()
+		try process.run()
+
+//		let homeDir = FileManager.default.homeDirectoryForCurrentUser.path()
 		//		let val = CFPreferencesCopyValue(
 		//			"" as CFString,
 		//			"\(homeDir)/Library/Preferences/.GlobalPreferences.plist" as CFString,
 		//			kCFPreferencesCurrentUser,
 		//			kCFPreferencesCurrentHost
 		//		)
-		let values = CFPreferencesCopyMultiple(
-			nil,
-			"\(homeDir)/Library/Preferences/.GlobalPreferences.plist" as CFString,
-			kCFPreferencesCurrentUser,
-			kCFPreferencesCurrentHost
-		)
-
-		for (key, value) in values as! [String: Any] {
-			print("\(key): \(value)")
-		}
+//		let values = CFPreferencesCopyMultiple(
+//			nil,
+//			"\(homeDir)/Library/Preferences/.GlobalPreferences.plist" as CFString,
+//			kCFPreferencesCurrentUser,
+//			kCFPreferencesCurrentHost
+//		)
+//
+//		for (key, value) in values as! [String: Any] {
+//			print("\(key): \(value)")
+//		}
 
 		//		let kCFPreferencesGlobal = ".GlobalPreferences" as CFString
 		//

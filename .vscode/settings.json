@@ -12,7 +12,11 @@
 	],
 	"sweetpad.build.derivedDataPath": "DerivedData",
 	"sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
-	"sweetpad.system.enableSetvbuf": false,
-	"sweetpad.tuist.autogenerate": true,
-	"sweetpad.build.allowProvisioningUpdates": false
+	"sweetpad.system.enableSetvbuf": true,
+	"sweetpad.build.allowProvisioningUpdates": true,
+	"lldb.library": "/Applications/Xcode-16.2.0.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+	"lldb.launch.expressions": "native",
+	"sweetpad.format.path": "just format",
+	"sweetpad.format.args": [],
+	"sweetpad.system.logLevel": "debug"
 }

@@ -39,6 +39,7 @@ let project = Project(
 			bundleId: "co.othr.SysInfoKit",
 			sources: ["src/SysInfoKit/Sources/**"],
 			dependencies: [
+				.external(name: "ArgumentParser"),
 				.external(name: "Command"),
 				.external(name: "MetaCodable"),
 				.external(name: "Version"),
