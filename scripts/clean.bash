@@ -17,13 +17,15 @@ function clean() {
 
 	"${HOME}/.local/bin/mise" exec -- tuist clean --path "${project_root}"
 
+	find "${project_root}" -type d -name '__pycache__' -exec rm -rf {} +
 	find "${project_root}" -type d -name '.build' -exec rm -rf {} +
-	find "${project_root}" -type d -name 'DerivedData' -exec rm -rf {} +
-	find "${project_root}" -type f -name 'Package.resolved' -exec rm -rf {} +
+	find "${project_root}" -type d -name '.venv' -exec rm -rf {} +
+	find "${project_root}" -type d -name '*.egg-info' -exec rm -rf {} +
 	find "${project_root}" -type d -name '*.xcodeproj' -exec rm -rf {} +
 	find "${project_root}" -type d -name '*.xcworkspace' -exec rm -rf {} +
-	find "${project_root}" -type d -name '.venv' -exec rm -rf {} +
-	find "${project_root}" -type d -name '__pycache__' -exec rm -rf {} +
+	find "${project_root}" -type d -name 'DerivedData' -exec rm -rf {} +
+	find "${project_root}" -type f -name 'Package.resolved' -exec rm -rf {} +
+
 	rm -rf "${project_root}/Derived"
 
 	sed -i '' '/LAST_UPDATE_CHECK/d' "${project_root}/.env"

@@ -25,6 +25,8 @@ lint: up
 
 up:
 	"{{ scripts_dir }}/up.bash"
+
+cache:
 	tuist cache --path "{{ project_root }}"
 
 generate target="":

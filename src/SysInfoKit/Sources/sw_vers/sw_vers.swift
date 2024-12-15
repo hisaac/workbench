@@ -1,57 +1,48 @@
-import ArgumentParser
+import Command
 import Foundation
 
-protocol RunnableCommand {
-	var binary: URL { get }
-	var arguments: [String] { get }
+protocol ShellCreated {
+	var rawOutput: String { get }
 }
 
-public struct sw_vers: ParsableCommand, RunnableCommand {
-	public static var configuration = CommandConfiguration(
-		commandName: "sw_vers",
-		abstract: "Print macOS system version information"
-	)
-
-	@Flag(help: "Print the product name")
-	public var productName: Bool = false
-
-	@Flag(help: "Print the product version")
-	public var productVersion: Bool = false
-
-	@Flag(help: "Print the product version extra")
-	public var productVersionExtra: Bool = false
-
-	@Flag(help: "Print the build version")
-	public var buildVersion: Bool = false
-
-	public var binary: URL = sw_vers.defaultBinary
-
-	public static let defaultBinary = URL(fileURLWithPath: "/usr/bin/sw_vers")
-
-	public var arguments: [String] {
-		var args = [String]()
-		if productName { args.append("--productName") }
-		if productVersion { args.append("--productVersion") }
-		if productVersionExtra { args.append("--productVersionExtra") }
-		if buildVersion { args.append("--buildVersion") }
-		return args
-	}
-
-	public init() {
-		self.init(binary: sw_vers.defaultBinary)
-	}
+public struct sw_vers: ShellCreated {
+	public let productName: String
+	public let productVersion: String
+	public let productVersionExtra: String?
+	public let buildVersion: String
+	public let rawOutput: String
 
 	public init(
-		binary: URL = sw_vers.defaultBinary,
-		productName: Bool = false,
-		productVersion: Bool = false,
-		productVersionExtra: Bool = false,
-		buildVersion: Bool = false
+		productName: String,
+		productVersion: String,
+		productVersionExtra: String?,
+		buildVersion: String,
+		rawOutput: String
 	) {
-		self.binary = binary
 		self.productName = productName
 		self.productVersion = productVersion
 		self.productVersionExtra = productVersionExtra
 		self.buildVersion = buildVersion
+		self.rawOutput = rawOutput
+	}
+
+	public init() async throws {
+		let commandInput = sw_versInput(flags: [])
+		let command = sw_versCommand(input: commandInput)
+		let arguments = [command.executable.path] + command.arguments
+
+		let rawOutput = try await CommandRunner().run(
+			arguments: arguments
+		).concatenatedString()
+
+		let output = sw_versOutput(from: rawOutput)
+
+		self.init(
+			productName: output.productName,
+			productVersion: output.productVersion,
+			productVersionExtra: output.productVersionExtra,
+			buildVersion: output.buildVersion,
+			rawOutput: rawOutput
+		)
 	}
 }
