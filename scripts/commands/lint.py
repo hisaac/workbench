@@ -7,7 +7,6 @@ from commands import (
 	PROJECT_ROOT,
 	CONFIG_DIR,
 	SOURCES_DIR,
-	TUIST_DIR,
 	XCRUN_BIN,
 )
 
@@ -40,9 +39,7 @@ def lint_swift() -> None:
 			CONFIG_DIR / "swift-format.json",
 			"--recursive",
 			SOURCES_DIR,
-			TUIST_DIR,
-			PROJECT_ROOT / "Project.swift",
-			PROJECT_ROOT / "Tuist.swift",
+			PROJECT_ROOT / "Package.swift",
 		],
 		check=True,
 	)

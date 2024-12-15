@@ -1,14 +1,22 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "sweetpad-lldb",
+			"type": "lldb",
 			"request": "launch",
-			"name": "Attach to running app (SweetPad)",
-			"preLaunchTask": "sweetpad: launch"
+			"args": [],
+			"cwd": "${workspaceFolder:Workbench}",
+			"name": "Debug Workbench",
+			"program": "${workspaceFolder:Workbench}/.build/debug/Workbench",
+			"preLaunchTask": "swift: Build Debug Workbench"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
+			"args": [],
+			"cwd": "${workspaceFolder:Workbench}",
+			"name": "Release Workbench",
+			"program": "${workspaceFolder:Workbench}/.build/release/Workbench",
+			"preLaunchTask": "swift: Build Release Workbench"
 		}
 	]
 }

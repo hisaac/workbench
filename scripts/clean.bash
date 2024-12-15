@@ -15,8 +15,6 @@ function main() {
 function clean() {
 	killall -q Xcode || true
 
-	"${HOME}/.local/bin/mise" exec -- tuist clean --path "${project_root}"
-
 	find "${project_root}" -type d -name '__pycache__' -exec rm -rf {} +
 	find "${project_root}" -type d -name '.build' -exec rm -rf {} +
 	find "${project_root}" -type d -name '.venv' -exec rm -rf {} +

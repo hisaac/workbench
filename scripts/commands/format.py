@@ -7,7 +7,6 @@ from commands import (
 	PROJECT_ROOT,
 	SCRIPTS_DIR,
 	SOURCES_DIR,
-	TUIST_DIR,
 	XCRUN_BIN,
 )
 
@@ -41,9 +40,7 @@ def format_swift() -> None:
 			"--in-place",
 			"--recursive",
 			SOURCES_DIR,
-			TUIST_DIR,
-			PROJECT_ROOT / "Project.swift",
-			PROJECT_ROOT / "Tuist.swift",
+			PROJECT_ROOT / "Package.swift",
 		],
 		check=True,
 	)

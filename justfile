@@ -5,8 +5,8 @@ src_dir      := project_root / "src"
 
 default: open
 
-open target="": (generate target)
-	xcrun xed "{{ project_root }}/Workbench.xcworkspace"
+open target="":
+	code "{{ project_root }}/workbench.code-workspace"
 
 build target="":
 	python "{{ scripts_dir }}/main.py" build {{ target }}
@@ -25,16 +25,6 @@ lint: up
 
 up:
 	"{{ scripts_dir }}/up.bash"
-
-cache:
-	tuist cache --path "{{ project_root }}"
-
-generate target="":
-	tuist generate --path "{{ project_root }}" --no-open {{ target }}
-
-edit: up
-	tuist edit --permanent --only-current-directory --path "{{ project_root }}"
-	xcrun xed "{{ project_root }}/Manifests.xcworkspace"
 
 clean:
 	"{{ scripts_dir }}/clean.bash" "{{ project_root }}"

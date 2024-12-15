@@ -51,7 +51,6 @@ function _export_vars() {
 	export CONFIG_DIR="${CONFIG_DIR:-$PROJECT_ROOT/.config}"
 	export SCRIPTS_DIR="${SCRIPTS_DIR:-$PROJECT_ROOT/scripts}"
 	export SOURCES_DIR="${SOURCES_DIR:-$PROJECT_ROOT/src}"
-	export TUIST_DIR="${TUIST_DIR:-$PROJECT_ROOT/Tuist}"
 
 	export MISE_BIN="${HOME}/.local/bin/mise"
 

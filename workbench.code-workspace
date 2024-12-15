@@ -1,30 +1,17 @@
 {
 	"folders": [
 		{
-			"name": "workbench",
 			"path": "."
 		}
 	],
 	"settings": {
 		"cSpell.words": [
-			"killall",
-			"othr",
-			"pycache",
-			"shellcheck",
-			"shfmt",
-			"swiftpm",
-			"venv",
-			"xcodes",
-			"yapf"
-		],
-		"sweetpad.build.derivedDataPath": "DerivedData",
-		"sweetpad.build.xcodeWorkspacePath": "Workbench.xcworkspace",
-		"sweetpad.system.enableSetvbuf": true,
-		"sweetpad.build.allowProvisioningUpdates": true,
-		"lldb.library": "/Applications/Xcode-16.2.0.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
-		"lldb.launch.expressions": "native",
-		"sweetpad.format.path": "just format",
-		"sweetpad.format.args": [],
-		"sweetpad.system.logLevel": "debug"
+			"frontmost"
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"sswg.swift-lang"
+		]
 	}
 }

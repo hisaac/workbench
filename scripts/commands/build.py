@@ -2,15 +2,15 @@ import argparse
 import subprocess
 
 from commands import (
-	MISE_BIN,
 	PROJECT_ROOT,
+	XCRUN_BIN,
 )
 
 
 def setup_parser(subparser) -> argparse.ArgumentParser:
-	parser = subparser.add_parser("build", help="Build the project using Tuist")
+	parser = subparser.add_parser("build", help="Build the project")
 	parser.add_argument(
-		"args", nargs="*", help="Additional arguments to pass to tuist build"
+		"args", nargs="*", help="Additional arguments to pass to swift build"
 	)
 	return parser
 
@@ -18,12 +18,10 @@ def setup_parser(subparser) -> argparse.ArgumentParser:
 def handle(args) -> None:
 	subprocess.run(
 		[
-			MISE_BIN,
-			"exec",
-			"--",
-			"tuist",
+			XCRUN_BIN,
+			"swift",
 			"build",
-			"--path",
+			"--package-path",
 			PROJECT_ROOT,
 			*args.args,
 		],

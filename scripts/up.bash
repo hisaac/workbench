@@ -34,7 +34,6 @@ function do_updates() {
 	update_mise
 	install_mise_plugins
 	install_python_dependencies
-	install_tuist_dependencies
 	update_timestamp
 }
 
@@ -66,11 +65,6 @@ function install_mise_plugins() {
 function install_python_dependencies() {
 	info "Installing Python dependencies"
 	mise_exec pip install -e .
-}
-
-function install_tuist_dependencies() {
-	info "Installing Tuist dependencies"
-	mise_exec tuist install --path "${PROJECT_ROOT}" --update
 }
 
 function select_xcode_version() {

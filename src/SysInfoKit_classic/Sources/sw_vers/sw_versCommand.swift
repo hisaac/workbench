@@ -84,16 +84,16 @@ public struct sw_versOutput: Codable {
 			guard parts.count == 2 else { continue }
 
 			switch parts[0] {
-			case "ProductName":
-				productName = parts[1]
-			case "ProductVersion":
-				productVersion = parts[1]
-			case "ProductVersionExtra":
-				productVersionExtra = parts[1]
-			case "BuildVersion":
-				buildVersion = parts[1]
-			default:
-				break
+				case "ProductName":
+					productName = parts[1]
+				case "ProductVersion":
+					productVersion = parts[1]
+				case "ProductVersionExtra":
+					productVersionExtra = parts[1]
+				case "BuildVersion":
+					buildVersion = parts[1]
+				default:
+					break
 			}
 		}
 

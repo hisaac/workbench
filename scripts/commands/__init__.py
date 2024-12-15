@@ -4,7 +4,6 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
 CONFIG_DIR = PROJECT_ROOT / ".config"
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 SOURCES_DIR = PROJECT_ROOT / "src"
-TUIST_DIR = PROJECT_ROOT / "tuist"
 
 MISE_BIN = Path.home() / ".local/bin/mise"
 XCRUN_BIN = "/usr/bin/xcrun"
