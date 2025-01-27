@@ -2,6 +2,8 @@
 
 This repository is a place for me to experiment with new tools and little projects. Consider anything here a work in progress, and if I consider it ready for use, I'll move it to a more permanent home.
 
+Also see: [`hisaac/ci`](https://github.com/hisaac/ci), my playground for experimenting with CI/CD tools and techniques.
+
 # SysInfoKit
 
 Library for introspecting information about the system currently running your code.
