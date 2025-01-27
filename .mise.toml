@@ -1,6 +1,7 @@
 [tools]
 java = "latest"
 just = "latest"
+pipx = "latest"
 python = "latest"
 shfmt = "latest"
 xcbeautify = "latest"
